@@ -1,47 +1,80 @@
-import { PROJECTS } from "../constants"
+import { PROJECTS } from "../constants";
 import { motion } from "framer-motion";
 
 const Projects = () => {
-    return (
-        <div className="border-b border-neutral-900 pb-4">
-            <motion.h1
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: -100 }}
-                transition={{ duration: 1.5 }} className="my-20 text-center text-4xl">Projects.</motion.h1>
-            <div>
-                {PROJECTS.map((project, index) => (
-                    <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
-                        <motion.div
-                            whileInView={{ opacity: 1, x: 0 }}
-                            initial={{ opacity: 0, x: -100 }}
-                            transition={{ duration: 1.5 }}
-                            className="w-full lg:w-1/4 flex justify-center sm:justify-start">
-                            <motion.img
-                                whileHover={{ scale: 1.2 }}
-                                whileTap={{ scale: 1.1 }}
-                                transition={{ duration: 0.5 }}
-                                src={project.image} alt={project.title} width={150} height={150} className="mb-6 rounded border-2" />
-                        </motion.div>
-                        <motion.div
-                            whileInView={{ opacity: 1, x: 0 }}
-                            initial={{ opacity: 0, x: 100 }}
-                            transition={{ duration: 1.5 }} className="w-full max-w-xl lg:w-3/4">
-                            <h6 className="mb-2 font-semibold flex justify-center sm:justify-normal">{project.title}</h6>
-                            <p className="mb-4 text-neutral-400 flex text-center sm:text-start">{project.description}</p>
-<div className="mt-2 flex flex-wrap gap-2">
-                            {project.technologies.map((tech, index) => (
-                                <span key={index} className={`mr-2 mt-4 rounded bg-neutral-900 px-2 py-1 text-sm font-bold ${index % 2 === 0 ?
-                                    "text-red-800" :
-                                    index % 3 === 0 ? "text-green-800" : "text-blue-800"
-                                    }`}>{tech}</span>
-                            ))}
-                           </div> 
-                        </motion.div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="border-b border-neutral-900 pb-20">
+      <motion.h1
+        initial={{ opacity: 0, y: -40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="my-20 text-center text-4xl font-semibold"
+      >
+        Selected Work.
+      </motion.h1>
 
-export default Projects
+      <div className="flex flex-col gap-24">
+        {PROJECTS.map((project, index) => {
+          const isReverse = index % 2 !== 0;
+
+          return (
+            <div
+              key={index}
+              className={`flex flex-col lg:flex-row items-center gap-10 px-4 lg:px-16 ${
+                isReverse ? "lg:flex-row-reverse" : ""
+              }`}
+            >
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: isReverse ? 80 : -80 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full lg:w-1/2"
+              >
+                <div className="overflow-hidden rounded-2xl border border-neutral-800">
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-[260px] lg:h-[320px] object-fill"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </div>
+              </motion.div>
+
+              {/* Content */}
+              <motion.div
+                initial={{ opacity: 0, x: isReverse ? -80 : 80 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full lg:w-1/2"
+              >
+                <h2 className="text-2xl lg:text-3xl font-semibold mb-4">
+                  {project.title}
+                </h2>
+
+                <p className="text-neutral-400 mb-6 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-3">
+                  {project.technologies.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="text-xs uppercase tracking-wide text-neutral-500 border-b border-neutral-700 pb-1"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Projects;
