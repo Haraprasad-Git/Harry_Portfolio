@@ -89,7 +89,7 @@ export const PROJECTS = [
     image: VI,
     description:
       "An enterprise manufacturing data management system to import vouchers, manage production schedules, and visualize operational data with advanced filtering, sorting, and export capabilities.",
-    technologies: ["React.js", "TypeScript", "Node.js", "MS SQL", "Tailwind CSS"],
+    technologies: ["React.js", "TypeScript", "Node.js", "Express.js",  "MS SQL", "Tailwind CSS"],
   },
   {
     title: "Self-Serve Portal",
