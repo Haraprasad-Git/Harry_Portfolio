@@ -78,6 +78,7 @@ export default function AdminPage() {
       setSavedAt(new Date().toLocaleTimeString());
     } catch (err: unknown) {
       alert(err instanceof Error ? err.message : "Save failed");
+      console.log(err)
     } finally {
       setSaving(false);
     }
