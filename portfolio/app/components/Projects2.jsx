@@ -1,5 +1,5 @@
 "use client"
-import { PROJECTS } from "../constants"
+import { backup } from "../constants"
 import { motion } from "framer-motion";
 
 const Projects = () => {
@@ -10,7 +10,7 @@ const Projects = () => {
                 initial={{ opacity: 0, y: -100 }}
                 transition={{ duration: 1.5 }} className="my-20 text-center text-4xl">Projects.</motion.h1>
             <div>
-                {PROJECTS.map((project, index) => (
+                {backup.projects.map((project, index) => (
                     <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
                         <motion.div
                             whileInView={{ opacity: 1, x: 0 }}

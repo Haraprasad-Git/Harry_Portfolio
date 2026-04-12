@@ -7,7 +7,8 @@ export async function GET() {
       "SELECT content FROM portfolio_content WHERE id = 1"
     );
 
-    return Response.json(rows[0]?.content);
+    return Response.json(rows[0]?.content || backup);
+
   } catch (err) {
     console.error(err);
     return new Response("Error fetching data", { status: 500 });

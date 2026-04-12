@@ -1,6 +1,7 @@
 "use client"
-import { PROJECTS } from "../constants";
+
 import { motion } from "framer-motion";
+import { backup } from "../constants";
 
 const Projects = () => {
   return (
@@ -15,7 +16,7 @@ const Projects = () => {
       </motion.h1>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 px-4">
-        {PROJECTS.map((project, index) => (
+        {backup.projects.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 40 }}

@@ -1,5 +1,5 @@
 "use client"
-import { HERO_CONTENT } from "../constants"
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Hero } from "../type";
