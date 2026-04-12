@@ -132,7 +132,7 @@ export const backup = {
   "hero": {
     "name": "Haraprasad Tripathy",
     "title": "Full Stack Developer",
-    "description": "I am a passionate Full-Stack Developer specializing in React, Next.js, SvelteKit, and Node.js, with 2.5+ years of hands-on experience building scalable, production-ready web applications. I have strong expertise in modern frontend development and backend API design, including RESTful services, SQL databases such as MySQL and MS SQL (T-SQL), and TypeScript-based architectures. I focus on writing clean, maintainable code and delivering reliable solutions that solve real business problems and improve user experience."
+    "description": "I’m a Full-Stack Developer with 3 years of hands-on experience building scalable, production-grade web applications. I specialize in modern JavaScript ecosystems, including React, Next.js, SvelteKit, and Node.js, with a strong focus on performance, maintainability, and clean architecture. I design responsive, user-focused interfaces on the frontend and develop robust, reliable APIs and data layers on the backend, working extensively with RESTful services and relational databases such as MySQL and MS SQL (T-SQL). I take a pragmatic approach to development—writing clean, efficient code that solves real-world problems, scales effectively, and delivers meaningful business value."
   },
   "about": "I am a dedicated and versatile Full-Stack Developer with 2.5+ years of professional experience building reliable and user-friendly web applications. I have worked across modern frontend and backend technologies including React, Next.js, SvelteKit, and Node.js, with strong experience in SQL databases such as MySQL and MS SQL. My development journey started with a curiosity for how systems work and has grown into a career focused on writing clean, maintainable code and delivering scalable solutions. I enjoy collaborating with cross-functional teams, solving complex technical problems, and continuously learning to adapt to evolving technologies.",
   "experiences": [
@@ -269,8 +269,8 @@ export const backup = {
     }
   ],
   "contact": {
-    "address1": "Shelter PG, Sector - 3, Vishwas City - 1",
-    "address2": "Chanakyapuri, Ahmedabad, Gujarat, 380060",
+    "address1": "Main Road, Near Block Square",
+    "address2": "Chandrapur, Rayagada, Odisha, India, 765020",
     "phoneNo": "+91 707 755 2981",
     "email": "tripathy.hp202@gmail.com"
   },
