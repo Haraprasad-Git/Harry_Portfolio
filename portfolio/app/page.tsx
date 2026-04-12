@@ -4,15 +4,12 @@ import ExperienceSection from "./components/Experience";
 import Navbar from "./components/Navbar"
 import Projects from "./components/Projects";
 import Technologies from "./components/Technologies";
-import fs from "fs/promises";
-import path from "path";
 import { PortfolioContent } from "./type";
 import HeroSection from "./components/Hero";
+import { getContent } from "@/lib/content";
 
 export default async function Home() {
-  const filePath = path.join(process.cwd(), "/app/data/content.json");
-  const json = await fs.readFile(filePath, "utf-8");
-  const content: PortfolioContent = JSON.parse(json);
+  const content: PortfolioContent = await getContent();
 
   return (
     <div className="overflow-x-hidden text-neutral-300 antialiased selection:bg-cyan-300 selection:text-cyan-900">

@@ -128,7 +128,7 @@ export const CONTACT = {
 };
 
 
-const backup = {
+export const backup = {
   "hero": {
     "name": "Haraprasad Tripathy",
     "title": "Full Stack Developer",

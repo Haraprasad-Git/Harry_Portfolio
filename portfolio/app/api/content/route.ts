@@ -1,22 +1,29 @@
-import { PortfolioContent } from "@/app/type";
-import fs from "fs/promises";
-import path from "path";
-
-export const runtime = "nodejs"; // IMPORTANT
-
-const filePath = path.join(process.cwd(), "app/data/content.json");
+import { backup } from "@/app/constants";
+import { getContent } from "@/lib/content";
+import pool from "@/lib/db";
 
 export async function GET() {
-  const file = await fs.readFile(filePath, "utf-8");
-  const data: PortfolioContent = JSON.parse(file);
-
-  return Response.json(data);
+  try {
+    const data = await getContent()
+    return Response.json(data);
+  } catch (err) {
+    console.error(err);
+    return Response.json(backup);
+  }
 }
 
 export async function POST(req: Request) {
-  const body: PortfolioContent = await req.json();
+  try {
+    const body = await req.json();
 
-  await fs.writeFile(filePath, JSON.stringify(body, null, 2));
+    await pool.query(
+      "UPDATE portfolio_content SET content = ? WHERE id = 1",
+      [JSON.stringify(body)]
+    );
 
-  return Response.json({ success: true });
+    return Response.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    return new Response("Error updating data", { status: 500 });
+  }
 }
