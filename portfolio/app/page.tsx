@@ -1,11 +1,7 @@
-import About from "./components/About";
-import Contact from "./components/Contact";
-import ExperienceSection from "./components/Experience";
-import Navbar from "./components/Navbar"
-import Projects from "./components/Projects";
-import Technologies from "./components/Technologies";
+
+import FloatingResume from "./components/FloatingResume";
+import SectionWrapper from "./components/SectionWrapper";
 import { PortfolioContent } from "./type";
-import HeroSection from "./components/Hero";
 import { getContent } from "@/lib/content";
 
 export default async function Home() {
@@ -18,15 +14,8 @@ export default async function Home() {
         <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 
 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(20,184,166,0.25),rgba(0,0,0,0))]" /></div>
 
-      <div className="container mx-auto sm:px-16 px-8 ">
-        <Navbar links={content.links} />
-        <HeroSection heroContent={content.hero} />
-        <About about={content.about} />
-        <Technologies />
-        <ExperienceSection experiences={content.experiences} />
-        <Projects projects={content.projects} />
-        <Contact contactInfo={content.contact} />
-      </div>
+      <SectionWrapper content={content} />
+      <FloatingResume resume={content.links.resume} />
 
     </div>
   );

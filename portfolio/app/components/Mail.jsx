@@ -1,103 +1,130 @@
-"use client"
-import { useState } from 'react';
-import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+"use client";
+
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import { BiArrowBack } from "react-icons/bi";
 
 const Mail = ({ setVisible }) => {
-    const formRef = useRef();
+    const formRef = useRef(null);
+
     const [form, setForm] = useState({
         name: "",
         email: "",
-        message: ""
+        message: "",
     });
+
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
 
-    }
-    const handleSubmit = (e) => {
+        setForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // basic validation (don’t skip this)
+        if (!form.name || !form.email || !form.message) {
+            alert("Please fill all fields");
+            return;
+        }
+
         setLoading(true);
-        emailjs.send(
-            'service_lfwdadq',
-            'template_cqaz2nh',
-            {
-                from_name: form.name,
-                to_name: 'Harry',
-                from_email: form.email,
-                to_email: "hosting4harry@gmail.com",
-                message: form.message
+
+        try {
+            const data = await emailjs.send("service_3it3zqd", "template_dvlqo0h", {
+                title: "Contacted from portfolio",
+                name: form.name,
+                time: new Date(),
+                message: form.message,
+                email: form.email,
             },
-            '9Vk0P0ifs9-GHU4j2'
-        ).then(() => {
-            setLoading(false);
-            alert('Thank you. I will get back to yo as soon as possible.');
+                {
+                    publicKey: "xmUPkz6snmXEAVDoj"
+                }
+            );
+            console.log(data)
+
+            alert("Thank you. I will get back to you as soon as possible.");
+
             setForm({
                 name: "",
                 email: "",
-                message: ""
-            })
-        }, (error) => {
+                message: "",
+            });
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong!");
+        } finally {
             setLoading(false);
-            console.log(error);
-            alert('Something went wrong!')
-        })
+        }
+    };
 
-    }
     return (
-
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className='relative mt-12 flex flex-col gap-8'
+            className="relative mt-12 flex flex-col gap-8"
         >
-            <div className='absolute -inset-10 flex justify-end me-10 card-img_hover'>
+            <div className="pointer-events-none absolute -inset-10 flex justify-end me-10">
                 <div
-                    className='bg-black w-10 h-10 rounded-full flex justify-center items-center cursor-pointer' title="Back"
-                    onClick={() => setVisible(prev => !prev)}>
-                    <BiArrowBack className='w-2/3 h-2/3 object-contain text-white' />
+                    className="pointer-events-auto bg-black w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+                    title="Back"
+                    onClick={() => setVisible((prev) => !prev)}
+                >
+                    <BiArrowBack className="w-2/3 h-2/3 text-white" />
                 </div>
             </div>
-            <label className='flex flex-col'>
-                <span className='text-white font-medium mb-4'>Your Name</span>
+
+            <label className="flex flex-col">
+                <span className="text-white font-medium mb-4">Name</span>
                 <input
-                    type='text'
+                    type="text"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
                     placeholder="What's your name?"
-                    className='bg-[#151030] py-4 px-6 placeholder:text-secondary text-white rounded-lg outlned-none border-none font-medium'
+                    className="bg-[#151030] py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                 />
             </label>
-            <label className='flex flex-col'>
-                <span className='text-white font-medium mb-4'>Your Email</span>
+
+            <label className="flex flex-col">
+                <span className="text-white font-medium mb-4">Email</span>
                 <input
-                    type='email'
+                    type="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
                     placeholder="What's your email?"
-                    className='bg-[#151030] py-4 px-6 placeholder:text-secondary text-white rounded-lg outlned-none border-none font-medium'
+                    className="bg-[#151030] py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                 />
             </label>
-            <label className='flex flex-col'>
-                <span className='text-white font-medium mb-4'>Your Message</span>
+
+            <label className="flex flex-col">
+                <span className="text-white font-medium mb-4">Message</span>
                 <textarea
                     rows={3}
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     placeholder="What do you want to say?"
-                    className='bg-[#151030] py-4 px-6 placeholder:text-secondary text-white rounded-lg outlned-none border-none font-medium'
+                    className="bg-[#151030] py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                 />
             </label>
-            <button type='submit' className='bg-[#151030] py-3 px-4 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'>{loading ? 'Sending...' : "Send"}</button>
+
+            <button
+                type="submit"
+                disabled={loading}
+                className="bg-[#151030] py-3 px-4 w-fit text-white font-bold shadow-md shadow-primary rounded-xl disabled:opacity-50"
+            >
+                {loading ? "Sending..." : "Send"}
+            </button>
         </form>
+    );
+};
 
-    )
-}
-
-export default Mail
+export default Mail;
