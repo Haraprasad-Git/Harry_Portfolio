@@ -4,6 +4,8 @@ import SectionWrapper from "./components/SectionWrapper";
 import { PortfolioContent } from "./type";
 import { getContent } from "@/lib/content";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const content: PortfolioContent = await getContent();
 
